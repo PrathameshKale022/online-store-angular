@@ -37,6 +37,7 @@ export class LoginComponent {
       this.authService.login(this.credentials)
         .pipe(
           catchError((error: HttpErrorResponse) => {
+            this.authService.setisAuthenticate(false);
             this.showerrorMsg = true;
             this.errorMessage = 'Invalid username or password';
             console.error('Authentication failed. Invalid username or password.' + error);
@@ -58,6 +59,7 @@ export class LoginComponent {
               // Example: this.router.navigate(['/dashboard']);
               this.authService.setToken(res.token);
               //console.log(`Login Successful: ${res.roles}`);
+              this.authService.setisAuthenticate(true);
               if (res.roles.includes('ROLE_ADMIN')){
                 localStorage.setItem('editflag','true');
                 this.router.navigate(['/dashboard'], { queryParams: { editflag: true } });

@@ -63,6 +63,10 @@ export class AuthService {
   isAuthenticated(): boolean {
     return this.isLoggedIn;
   }
+
+  setisAuthenticate(isLoggedIn: boolean): void{
+    this.isLoggedIn = isLoggedIn;
+  }
 }
 
 

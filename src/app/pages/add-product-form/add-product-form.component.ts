@@ -1,6 +1,6 @@
 // add-product-form.component.ts
 
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { ProductService } from '../../product.service';
 import { Product } from '../../product';
@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddProductFormComponent implements OnInit {
   product: Product = { product_id: 0, title: '', category:'',price: 0 };
-  
+  @Output() add = new EventEmitter<Product>();
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class AddProductFormComponent implements OnInit {
     this.productService.addProduct(this.product).subscribe(
       product => {
         console.log('Product Added Successfully') 
-        this.productService.getProducts();
+        this.productService.products.push(product)
       });
     // Navigate back to the product list after adding the product
     //this.router.navigate(['/admin/products']);

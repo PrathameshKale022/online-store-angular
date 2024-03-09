@@ -18,7 +18,7 @@
     <td>{{ product.price }}</td>
     <!-- Add other product fields as needed -->
     <td *ngIf="editflag">
-      <button class="edit-button" (click)="editProduct(product.product_id)">Edit</button>
+      <button class="edit-button" (click)="editProduct(product.product_id, product)">Edit</button>
       <button class="delete-button" (click)="deleteProduct(product.product_id)">Delete</button>
     </td>
   </tr>

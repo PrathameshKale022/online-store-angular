@@ -10,7 +10,7 @@ export class ProductService {
 
   private apiUrl = 'http://localhost:9092/api/v1/productModule'; 
 
-  private products: Product[] = [
+  products: Product[] = [
     { product_id: 1, title: 'Product 1', category: 'Category A', price: 10 },
     { product_id: 2, title: 'Product 2', category: 'Category B', price: 20 },
     { product_id: 3, title: 'Product 3', category: 'Category A', price: 30 }
@@ -41,13 +41,15 @@ export class ProductService {
     const product = this.products.find(p => p.product_id === id);
     return of(product);
   }
-  editProduct(id: number, updatedProduct: Product): void {
+  editProduct(id: number, updatedProduct: Product): Observable<Product> {
     // Find the index of the product with the given ID
+    
     const index = this.products.findIndex(product => product.product_id === id);
     // If the product is found, update it
     if (index !== -1) {
       this.products[index] = updatedProduct;
     }
+    return this.http.post<Product>(`${this.apiUrl}/admin/products/${id}`, updatedProduct);
   }
 
   deleteProduct(id: number): Observable<string> {

@@ -17,12 +17,12 @@
 </div>
 <div class="dashboard-container" *ngIf="showAddProduct">
     <div>
-        <app-add-product-form></app-add-product-form>
+        <app-add-product-form (add)="addProduct($event)"></app-add-product-form>
     </div>
 </div>
 
 <div class="dashboard-container">
     <div>
-        <app-admin-products-list></app-admin-products-list>
+        <app-admin-products-list [products]="(products$ | async) || []" (edit)="editProduct($event.id,$event.updatedProduct)" (delete)="deleteProduct($event.id)"></app-admin-products-list>
     </div>
 </div>
