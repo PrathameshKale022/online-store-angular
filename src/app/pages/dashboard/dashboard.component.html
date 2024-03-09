@@ -1,0 +1,28 @@
+<!-- dashboard.component.html -->
+<div class="dashboard-container">
+    <h2>Welcome to the Dashboard!</h2>
+    <!-- Add dashboard content here -->
+
+    <div class="header">
+        <h3>EKFC STORE</h3>
+        <div class="button-container">
+            <button class="add-product-button" (click)="toggleAddProduct()">
+                {{ showAddProduct ? 'Close Add Product' : 'Add Product' }}
+            </button>
+            <button class="logout-button" (click)="logout()">Logout</button>
+        </div>
+
+    </div>
+
+</div>
+<div class="dashboard-container" *ngIf="showAddProduct">
+    <div>
+        <app-add-product-form></app-add-product-form>
+    </div>
+</div>
+
+<div class="dashboard-container">
+    <div>
+        <app-admin-products-list></app-admin-products-list>
+    </div>
+</div>

@@ -55,6 +55,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+         
           "configurations": {
             "production": {
               "buildTarget": "online-store2:build:production"
@@ -91,5 +92,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
