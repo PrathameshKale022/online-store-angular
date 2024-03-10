@@ -44,7 +44,7 @@ export const addProduct = createAction(
   
   export const deleteProductSuccess = createAction(
     '[Product] Delete Product Success',
-    props<{ id: number }>()
+    props<{ id: number  }>()
   );
   
   export const deleteProductFailure = createAction(

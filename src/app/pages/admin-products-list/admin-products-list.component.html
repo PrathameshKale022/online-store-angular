@@ -4,7 +4,7 @@
 
 <table class="product-table">
   <tr>
-    <th>ID</th>
+    <!-- <th>ID</th> -->
     <th>Name</th>
     <th>Price</th>
     <th>Category</th>
@@ -12,10 +12,10 @@
     <th *ngIf="editflag">Actions</th>
   </tr>
   <tr *ngFor="let product of products">
-    <td>{{ product.product_id }}</td>
+    <!-- <td>{{ product.product_id }}</td> -->
     <td>{{ product.title }}</td>
-    <td>{{ product.category }}</td>
     <td>{{ product.price }}</td>
+    <td>{{ product.category }}</td>
     <!-- Add other product fields as needed -->
     <td *ngIf="editflag">
       <button class="edit-button" (click)="editProduct(product.product_id, product)">Edit</button>

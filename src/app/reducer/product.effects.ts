@@ -28,7 +28,7 @@ export class ProductEffects {
     ofType(addProduct),
     mergeMap(({ product }) => this.productService.addProduct(product)
       .pipe(
-        map(() => addProductSuccess({ product })),
+        map(() => { return {type: 'Add Product Success Action' }}),
         catchError(error => of(addProductFailure({ error })))
       )
     )
@@ -48,7 +48,14 @@ export class ProductEffects {
     ofType(deleteProduct),
     mergeMap(({ id }) => this.productService.deleteProduct(id)
       .pipe(
-        map(() => deleteProductSuccess({ id })),
+        map((responseMessage: string) => {
+            if (responseMessage === 'Product Deleted Successfully') {
+              return deleteProductSuccess({id});
+            } else {
+              // Handle unexpected response message
+              return deleteProductFailure({ error: 'Unexpected response message' });
+            }
+          }),
         catchError(error => of(deleteProductFailure({ error })))
       )
     )

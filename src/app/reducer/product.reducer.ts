@@ -45,7 +45,8 @@ export const productReducer = createReducer(
   })),
   on(deleteProduct, (state, { id }) => ({
     ...state,
-    products: state.products.filter(p => p.product_id !== id)
+    loading: false,
+    error: null
   })),
   on(addProductSuccess, (state, { product }) => ({
     ...state,
@@ -61,6 +62,8 @@ export const productReducer = createReducer(
 
   on(deleteProductSuccess, (state, { id }) => ({
     ...state,
-    products: state.products.filter(product => product.product_id !== id)
+    products: state.products.filter(p => p.product_id !== id),
+    loading: false
+    //products: state.products.filter(product => product.product_id !== id)
   }))
 );

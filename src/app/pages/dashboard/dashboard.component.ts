@@ -8,7 +8,7 @@ import { AdminProductsListComponent } from '../admin-products-list/admin-product
 import { Product } from '../../product';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { addProduct, deleteProduct, editProduct } from '../../reducer/action/product.actions';
+import { addProduct, deleteProduct, editProduct, loadProducts } from '../../reducer/action/product.actions';
 import { selectProducts } from '../../selector/product.selectors';
 
 
@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   showAddProduct: boolean = false;
   editflag: boolean = false;
   products$: Observable<Product[]>;
+  products : Product[] = [];
 
   constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute,private store: Store<{ products: Product[] }>) {
     this.products$ = store.pipe(select(selectProducts));
@@ -30,7 +31,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize dashboard data or fetch user-specific information
-    this.editflag = this.route.snapshot.queryParams['editflag'];
+   //this.editflag = this.route.snapshot.queryParams['editflag'];
+    this.store.dispatch(loadProducts()); 
   }
 
   logout(): void {
@@ -46,16 +48,24 @@ export class DashboardComponent implements OnInit {
   addProduct(product: Product): void {
     // Dispatch addProduct action
     this.store.dispatch(addProduct({ product }));
+    //this.products.push(product);
   }
 
   editProduct(id: number, updatedProduct: Product): void {
     // Dispatch editProduct action
     this.store.dispatch(editProduct({ id, updatedProduct }));
+
+    // const index = this.products.findIndex(product => product.product_id === id);
+    // // If the product is found, update it
+    // if (index !== -1) {
+    //   this.products[index] = updatedProduct;
+    // }
   }
 
   deleteProduct(id: number): void {
     // Dispatch deleteProduct action
     this.store.dispatch(deleteProduct({ id }));
+    //this.products = this.products.filter(product => product.product_id !== id);
   }
 
 }

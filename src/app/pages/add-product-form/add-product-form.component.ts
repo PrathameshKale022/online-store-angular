@@ -5,6 +5,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { ProductService } from '../../product.service';
 import { Product } from '../../product';
 import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 
 @Component({
@@ -17,18 +18,23 @@ import { FormsModule } from '@angular/forms';
 export class AddProductFormComponent implements OnInit {
   product: Product = { product_id: 0, title: '', category:'',price: 0 };
   @Output() add = new EventEmitter<Product>();
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService, private router: Router) {
+    
+   }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
+    
+    // this.productService.addProduct(this.product).subscribe(
+    //   product => {
+    //     console.log('Product Added Successfully') 
+    //     //this.productService.products.push(product)
+    //       this.dashboardcomponent.addProduct(product);
+    //   });
     console.log(this.product.title);
-    this.productService.addProduct(this.product).subscribe(
-      product => {
-        console.log('Product Added Successfully') 
-        this.productService.products.push(product)
-      });
+    this.add.emit(this.product);
     // Navigate back to the product list after adding the product
     //this.router.navigate(['/admin/products']);
   }

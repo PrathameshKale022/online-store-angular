@@ -18,6 +18,6 @@
 
 <div class="dashboard-container">
     <div>
-        <app-admin-products-list></app-admin-products-list>
+        <app-admin-products-list [products]="(products$ | async) || []" ></app-admin-products-list>
     </div>
 </div>
