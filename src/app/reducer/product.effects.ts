@@ -48,8 +48,8 @@ export class ProductEffects {
     ofType(deleteProduct),
     mergeMap(({ id }) => this.productService.deleteProduct(id)
       .pipe(
-        map((responseMessage: string) => {
-            if (responseMessage === 'Product Deleted Successfully') {
+        map((message: string) => {
+            if (message === 'Product Deleted Successfully') {
               return deleteProductSuccess({id});
             } else {
               // Handle unexpected response message
